@@ -1,0 +1,82 @@
+﻿.text-wrapper {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 48px;
+    font-weight: 400;
+    left: 624px;
+    letter-spacing: 0;
+    line-height: normal;
+    top: 0;
+    width: 513px;
+}
+
+.images {
+    display: flex;
+    overflow-x: auto;
+    height: 410px;
+    position: relative;
+    top: 2px;
+}
+
+    .images::-webkit-scrollbar {
+        width: 0.5rem;
+    }
+
+    .images::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
+.img-with-text {
+    margin-top: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    height: 350px;
+    background-color: #ebebeb;
+    border-radius: 15px;
+    position: relative;
+    width: 265px;
+    margin-right: 35px;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .img-with-text:hover {
+        transform: scale(1.1); /* Increase the size by 10% on hover */
+    }
+
+.img {
+    flex-shrink: 0;
+    height: 300px;
+    left: 10px;
+    position: absolute;
+    top: 8px;
+    width: 245px;
+    border-radius: 10px;
+}
+
+.img-with-text .text-wrapper {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    left: 10px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 313px;
+    width: 245px;
+}
+
+.heart-button {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+    .heart-button.hearted {
+        color:red;
+    }

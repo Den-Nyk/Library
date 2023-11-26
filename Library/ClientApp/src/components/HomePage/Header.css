@@ -1,0 +1,14 @@
+﻿.headerComponent {
+    margin-top: 0px;
+    height: 471px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+    .headerComponent .header {
+        height: 400px;
+        width: 100%;
+        object-position:  center;
+        margin-top: 0px;
+    }

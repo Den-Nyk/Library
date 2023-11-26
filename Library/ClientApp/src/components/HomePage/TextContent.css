@@ -1,0 +1,56 @@
+﻿.textImg {
+    height: 769px;
+    position: relative;
+    width: 1137px;
+}
+
+    .textImg .content {
+        height: 769px;
+        left: 0;
+        top: 0;
+        width: 1141px;
+    }
+
+    .textImg .img {
+        height: 757px;
+        left: 0;
+        position: absolute;
+        top: 3px;
+        width: 550px;
+        object-fit: cover;
+    }
+
+    .textImg .text-wrapper {
+        color: #000000;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 48px;
+        font-weight: 400;
+        left: 624px;
+        letter-spacing: 0;
+        line-height: normal;
+        position: absolute;
+        top: 0;
+        width: 513px;
+    }
+
+    .textImg .rectangle {
+        background-color: #0084ff;
+        height: 82px;
+        left: 600px;
+        position: absolute;
+        top: 3px;
+        width: 14px;
+    }
+
+    .textImg .text-on-page {
+        color: #000000;
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 16px;
+        font-weight: 400;
+        left: 600px;
+        letter-spacing: 0;
+        line-height: normal;
+        position: absolute;
+        top: 97px;
+        width: 520px;
+    }
