@@ -53,14 +53,10 @@ namespace Library.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-
-
                     return Ok(new { name=model.Name + ' ' + model.Surname, email = model.Email, message = "Registration successful." });
                 }
-
                 return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
             }
-
             return BadRequest(new { errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)) });
         }
 

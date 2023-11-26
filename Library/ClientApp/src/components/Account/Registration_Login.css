@@ -1,4 +1,4 @@
-﻿.container {
+﻿.loginRegisterContainer {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -107,6 +107,15 @@
     justify-content: center;
     align-items: center;
     color: red;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.redirect-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: blue;
     margin-top: 25px;
     font-size: 25px;
 }

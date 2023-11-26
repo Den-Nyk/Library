@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Library.Domains;
 
-// Add profile data for application users by adding properties to the UserDomain class
 public class UserDomain : IdentityUser
 {
     [PersonalData, Required, MaxLength(128)]

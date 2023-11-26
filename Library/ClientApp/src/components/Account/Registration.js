@@ -108,7 +108,7 @@ export class Registration extends Component {
         const { errors, serverAnswer } = this.state;
 
         return (
-            <div className='container'>
+            <div className='loginRegisterContainer'>
                 <div className='header'>
                     <div className='text'>Sing up</div>
                     <div className='underline'></div>
