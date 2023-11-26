@@ -2,21 +2,27 @@
 import './Scroll.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ImgGreatGatsby from './Img/TheGreatHutsby.jpg';
+import axios from 'axios';
 
 export class Scroll extends Component {
     static displayName = Scroll.name;
 
     constructor(props) {
         super(props);
-        this.state = { books: [], loading: true };
+        this.state = {
+            books: [],
+            loading: true,
+            isAuthenticated: localStorage.getItem('user') !== null
+        };
     }
 
     async getBooks() {
         const response = await fetch('https://localhost:7165/books/GetBooksOfAllTime');
         const data = await response.json();
         this.setState({
-            books: data, 
-            loading: false });
+            books: data,
+            loading: false
+        });
     }
 
     componentDidMount() {
@@ -24,19 +30,45 @@ export class Scroll extends Component {
     }
 
     handleClick = async (bookId) => {
-        const updatedBooks = this.state.books.map(book => {
-            if (book.id === bookId) {
-                return { ...book, isHearted: !book.isHearted };
-            }
-            return book;
-        });
+        let isHearted = false;
+        if (this.state.isAuthenticated === true) {
+            const updatedBooks = this.state.books.map(book => {
+                if (book.id === bookId) {
+                    return { ...book, isHearted: !book.isHearted };
+                    isHearted = book.isHearted;         
+                }
+                return book;
+            });
 
-        await new Promise(resolve => this.setState({ books: updatedBooks }, resolve));
+            await new Promise(resolve => this.setState({ books: updatedBooks }, resolve));
 
-        const sleep = ms => new Promise(r => setTimeout(r, ms));
+            const userString = localStorage.getItem('user');
+            const user = JSON.parse(userString);
+            const email = user ? user.email : null;
 
-        await sleep(5000);
-        console.log("some text");
+            axios({
+                method: 'post',
+                url: 'https://localhost:7165/books/UpdateHeartedStatus',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    BookId: bookId,
+                    Email: email,
+                    isHearted: isHearted
+                }
+            })
+                .then(response => {
+                    if (!response.status === 200) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        else {
+            window.location.href = '/login?message=redirectToLogin';
+        }
     }
 
     static renderImage(img) {

@@ -1,6 +1,10 @@
-﻿using Library.Models;
+﻿using Library.Context;
+using Library.Domains;
+using Library.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 
@@ -26,5 +30,25 @@ namespace Library.Controllers
 
             return books;
         }
+
+        [HttpPost("UpdateHeartedStatus")]
+        public IActionResult UpdateHeartedStatus([FromBody] UpdateHeartedStatusModel updateModel)
+        {
+            /*var userBook = _context.UserBooks.FirstOrDefault(ub => ub.Email == updateModel.Email && ub.BookId == updateModel.BookId);
+
+            if (userBook != null)
+            {
+                userBook.IsHearted = updateModel.IsHearted;
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }*/
+            return Ok();
+        }
+
+
     }
 }

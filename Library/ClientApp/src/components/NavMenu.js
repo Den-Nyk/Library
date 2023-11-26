@@ -25,6 +25,7 @@ export class NavMenu extends Component {
     handleLogout = () => {
         localStorage.removeItem('user');
         this.setState({ isAuthenticated: false });
+        window.location.reload();
     }
 
     render() {
