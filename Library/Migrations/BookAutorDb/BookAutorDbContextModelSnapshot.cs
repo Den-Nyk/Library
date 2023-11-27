@@ -44,7 +44,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.Book", b =>
@@ -68,7 +68,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.BookAuthor", b =>
@@ -91,7 +91,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookAuthors");
+                    b.ToTable("BookAuthors", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.BookType", b =>
@@ -114,7 +114,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Types");
+                    b.ToTable("Types", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.Image", b =>
@@ -136,7 +136,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.IsBookHearted", b =>
@@ -161,7 +161,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("IsBooksHearted");
+                    b.ToTable("IsBooksHearted", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.Language", b =>
@@ -193,7 +193,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasIndex("PublishingHouseId");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Languages", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.MoreInfoAboutBook", b =>
@@ -228,7 +228,7 @@ namespace Library.Migrations.BookAutorDb
                     b.HasIndex("LanguageId")
                         .IsUnique();
 
-                    b.ToTable("MoreInfoAboutBooks");
+                    b.ToTable("MoreInfoAboutBooks", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.PublishingHouse", b =>
@@ -251,7 +251,7 @@ namespace Library.Migrations.BookAutorDb
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("PublishingHouses");
+                    b.ToTable("PublishingHouses", (string)null);
                 });
 
             modelBuilder.Entity("Library.Domains.BookAuthor.BookAuthor", b =>

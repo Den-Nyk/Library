@@ -32,10 +32,10 @@ export class Login extends Component {
             return;
 
         try {
-            const response = await axios.post('https://localhost:7165/api/Account/login', this.state.formData);
+            const response = await axios.post('https://localhost:7165/api/Account/login', this.state.formData, { withCredentials: true });
 
             if (response.status === 200) {
-                localStorage.setItem('user', JSON.stringify({ name: response.data.name, email: response.data.email }));
+                localStorage.setItem('user', JSON.stringify({ name: response.data.name }));
                 window.location.reload();
                 window.location.href = '/';
             }
@@ -56,8 +56,8 @@ export class Login extends Component {
     };
 
     render() {
-        const query = new URLSearchParams(window.location.search);
-        const message = query.get('message');
+        const message = sessionStorage.getItem('errorMessage');
+        sessionStorage.removeItem('errorMessage');
 
         const { serverAnswer } = this.state;
 

@@ -1,8 +1,10 @@
 ﻿using Library.Context;
 using Library.Domains;
 using Library.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,6 +16,14 @@ namespace Library.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
+        private readonly UserManager<UserDomain> _userManager;
+
+        public BooksController(
+            UserManager<UserDomain> userManager)
+        {
+            _userManager = userManager;
+        }
+
         [HttpGet("GetBooksOfAllTime")]
         public IEnumerable<BookOfAllTime> GetBooksOfAllTime()
         {
@@ -31,6 +41,7 @@ namespace Library.Controllers
             return books;
         }
 
+        [Authorize]
         [HttpPost("UpdateHeartedStatus")]
         public IActionResult UpdateHeartedStatus([FromBody] UpdateHeartedStatusModel updateModel)
         {

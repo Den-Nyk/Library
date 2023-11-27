@@ -12,12 +12,13 @@ export class Scroll extends Component {
         this.state = {
             books: [],
             loading: true,
-            isAuthenticated: localStorage.getItem('user') !== null
         };
     }
 
     async getBooks() {
-        const response = await fetch('https://localhost:7165/books/GetBooksOfAllTime');
+        const response = await fetch('https://localhost:7165/books/GetBooksOfAllTime', {
+            credentials: 'include'
+        });
         const data = await response.json();
         this.setState({
             books: data,
@@ -30,45 +31,27 @@ export class Scroll extends Component {
     }
 
     handleClick = async (bookId) => {
-        let isHearted = false;
-        if (this.state.isAuthenticated === true) {
-            const updatedBooks = this.state.books.map(book => {
-                if (book.id === bookId) {
-                    return { ...book, isHearted: !book.isHearted };
-                    isHearted = book.isHearted;         
-                }
-                return book;
-            });
+        const isHearted = this.state.books.find(b => b.id === bookId).isHearted;
 
-            await new Promise(resolve => this.setState({ books: updatedBooks }, resolve));
+        axios.post('https://localhost:7165/books/UpdateHeartedStatus', { bookId, isHearted }, { withCredentials: true })
+            .then(response => {
+                if (response.status === 200) {
+                    const updatedBooks = this.state.books.map(book => {
+                        return book.id === bookId ? { ...book, isHearted: !book.isHearted } : book;
+                    });
 
-            const userString = localStorage.getItem('user');
-            const user = JSON.parse(userString);
-            const email = user ? user.email : null;
-
-            axios({
-                method: 'post',
-                url: 'https://localhost:7165/books/UpdateHeartedStatus',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                    BookId: bookId,
-                    Email: email,
-                    isHearted: isHearted
+                    new Promise(resolve => this.setState({ books: updatedBooks }, resolve));
                 }
             })
-                .then(response => {
-                    if (!response.status === 200) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-        else {
-            window.location.href = '/login?message=redirectToLogin';
-        }
+            .catch(error => {
+                if (error.response && error.response.status === 404) {
+                    const errorMessage = 'redirectToLogin';  
+                    sessionStorage.setItem('errorMessage', errorMessage);
+                    window.location.href = '/login';
+                } else {
+                    console.error('Error during request:', error);
+                }
+            });
     }
 
     static renderImage(img) {

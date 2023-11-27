@@ -81,10 +81,12 @@ export class Registration extends Component {
             return;
 
         try {
-            const response = await axios.post('https://localhost:7165/api/Account/register', this.state.formData);
+            const response = await axios.post('https://localhost:7165/api/Account/register', this.state.formData,
+                { withCredentials: true }
+            );
 
             if (response.status === 200) {
-                localStorage.setItem('user', JSON.stringify({ name: response.data.name, email: response.data.email }));
+                localStorage.setItem('user', JSON.stringify({ name: response.data.name }));
                 window.location.reload();
                 window.location.href = '/';
             }

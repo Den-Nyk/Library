@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import axios from 'axios';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -23,9 +24,17 @@ export class NavMenu extends Component {
     }
 
     handleLogout = () => {
-        localStorage.removeItem('user');
-        this.setState({ isAuthenticated: false });
-        window.location.reload();
+        axios.post('https://localhost:7165/api/Account/logout', {}, { withCredentials: true })
+            .then(response => {
+                if (response.data.message === 'User logged out successfully.') {
+                    localStorage.removeItem('user');
+                    this.setState({ isAuthenticated: false });
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error during logout:', error);
+            });
     }
 
     render() {
