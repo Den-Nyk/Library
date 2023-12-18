@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Library.Context;
 using Library.Domains;
+using Library.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("UserDbContextConnection") ?? throw new InvalidOperationException("Connection string 'UserDbContextConnection' not found.");
@@ -12,6 +13,12 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 builder.Services.AddDefaultIdentity<UserDomain>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<UserDbContext>();
+
+var connectionStringBook = builder.Configuration.GetConnectionString("BooksAuthorsDbContextConnection") ?? throw new InvalidOperationException("Connection string 'UserDbContextConnection' not found.");
+builder.Services.AddDbContext<BookAutorDbContext>(options =>
+{
+    options.UseSqlServer(connectionStringBook);
+});
 
 // Add services to the container.
 
