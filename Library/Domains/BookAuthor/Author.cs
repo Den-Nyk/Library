@@ -13,7 +13,9 @@ namespace Library.Domains.BookAuthor
 
         public string Description { get; set; } = string.Empty;
 
-        public DateTime DateOfBirthday { get; set; }
+        public string DateOfBirthday { get; set; } = string.Empty;
+
+        public string LinkToYaBook { get; set; } = string.Empty;
 
 
         public ICollection<BookAuthor> BookAuthors { get; set; } = null!;

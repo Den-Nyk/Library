@@ -16,8 +16,11 @@ namespace Library.Domains.BookAuthor
 
         public string? Description { get; set; }
 
+        [Required]
+        public string LinkToYaBook { get; set; }
 
-        public ICollection<IsBookHearted> UserBookInteractions { get; set; } = null!;
+
+        public ICollection<IsBookHearted> IsBooksHearted { get; set; } = null!;
 
         public ICollection<BookAuthor> BookAuthors { get; set; } = null!;
 

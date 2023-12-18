@@ -8,7 +8,7 @@ namespace Library.Domains.BookAuthor
         public int Id { get; set; }
 
         [Required]
-        public int PublishedHouseId { get; set; }
+        public int PublishingHouseId { get; set; }
 
         [Required, MaxLength(128)]
         public string? LanguageName { get; set; }
