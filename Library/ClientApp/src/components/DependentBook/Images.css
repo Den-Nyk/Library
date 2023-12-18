@@ -1,0 +1,35 @@
+﻿.Images {
+    width: 524px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 725px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selectedImg {
+    height: 600px;
+    width: 524px;
+}
+
+.smallImages {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.bookSmallImg {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    height: 100px;
+    background-color: #ebebeb;
+    border-radius: 15px;
+    position: relative;
+    width: 60px;
+    margin-right: 33px;
+}
