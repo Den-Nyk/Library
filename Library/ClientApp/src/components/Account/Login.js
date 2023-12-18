@@ -1,4 +1,4 @@
-﻿import './Registration_Login.css'
+﻿import './Registration_Login.css';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import axios from 'axios';
