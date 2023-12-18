@@ -1,8 +1,10 @@
-import { Counter } from "./components/Counter";
+import { AddBookByYaBookUrl } from "./components/AddBook/AddBookByYaBookUrl";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/HomePage/Home";
 import { Login } from './components/Account/Login';
 import { Registration } from './components/Account/Registration';
+import { DependBook } from './components/DependentBook/DependBook'
+import { ShowBooks } from './components/AllBooks/ShowBooks'
 
 const AppRoutes = [
     {
@@ -10,8 +12,8 @@ const AppRoutes = [
         element: <Home />
     },
     {
-        path: '/counter',
-        element: <Counter />
+        path: '/addBookByYaBookUrl',
+        element: <AddBookByYaBookUrl />
     },
     {
         path: '/fetch-data',
@@ -24,6 +26,14 @@ const AppRoutes = [
     {
         path: '/registation',
         element: <Registration />
+    },
+    {
+        path: '/depend-book',
+        element: <DependBook />
+    },
+    {
+        path: '/show-books',
+        element: <ShowBooks />
     }
 ];
 

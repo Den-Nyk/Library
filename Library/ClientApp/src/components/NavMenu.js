@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Input, ListGroup, ListGroupItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 import axios from 'axios';
+import { handleImageClick } from './BooksClickFunctions';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -11,10 +12,42 @@ export class NavMenu extends Component {
         super(props);
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+
         this.state = {
             collapsed: true,
-            isAuthenticated: localStorage.getItem('user') !== null
+            isAuthenticated: localStorage.getItem('user') !== null,
+            searchValue: '',
+            filteredBooks: []
         };
+    }
+
+    handleSearch(event) {
+        console.log('handleSearch called');
+
+        const searchValue = event.target.value;
+        console.log('searchValue:', searchValue);
+
+
+        if (searchValue.trim() === '') {
+            this.setState({
+                searchValue,
+                filteredBooks: []
+            });
+            return;
+        }
+
+        axios.get(`https://localhost:7165/books/Search?query=${searchValue}`, { withCredentials: true })
+            .then(response => {
+                const filteredBooks = response.data;
+                this.setState({
+                    searchValue,
+                    filteredBooks
+                });
+            })
+            .catch(error => {
+                console.error('Error during book search:', error);
+            });
     }
 
     toggleNavbar() {
@@ -38,7 +71,7 @@ export class NavMenu extends Component {
     }
 
     render() {
-        const { isAuthenticated } = this.state;
+        const { isAuthenticated, searchValue, filteredBooks } = this.state;
 
         return (
             <header>
@@ -48,13 +81,32 @@ export class NavMenu extends Component {
                     <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                         <ul className="navbar-nav flex-grow">
                             <NavItem>
+                                <Input
+                                    id="searchInput"
+                                    type="text"
+                                    placeholder="Search books"
+                                    value={searchValue}
+                                    onChange={this.handleSearch}
+                                />
+                                {filteredBooks.length > 0 && (
+                                    <ListGroup
+                                        className="search-results">
+                                        {filteredBooks.map(book => (
+                                            <ListGroupItem key={book.id} onClick={() => handleImageClick(book.id)}>
+                                                {book.name}
+                                            </ListGroupItem>
+                                        ))}
+                                    </ListGroup>
+                                )}
+                            </NavItem>
+                            <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/show-books">Show books</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/addBookByYaBookUrl">Add new book</NavLink>
                             </NavItem>
                             {isAuthenticated ? (
                                 <>
