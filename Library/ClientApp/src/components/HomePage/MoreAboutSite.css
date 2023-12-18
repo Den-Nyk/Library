@@ -1,0 +1,13 @@
+﻿.MoreAboutSite {
+    width: 100%;
+}
+
+    .MoreAboutSite .Header {
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 24px;
+    }
+
+    .MoreAboutSite .Text {
+        font-family: "Inter-Regular", Helvetica;
+        font-size: 18px;
+    }

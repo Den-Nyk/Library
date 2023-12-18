@@ -13,7 +13,7 @@
 .images {
     display: flex;
     overflow-x: auto;
-    height: 410px;
+    height: 430px;
     position: relative;
     top: 2px;
 }
@@ -27,12 +27,12 @@
     }
 
 .img-with-text {
-    margin-top: 19px;
+    margin-top: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    height: 350px;
+    height: 370px;
     background-color: #ebebeb;
     border-radius: 15px;
     position: relative;
@@ -58,7 +58,7 @@
 .img-with-text .text-wrapper {
     color: #000000;
     font-family: "Inter-Regular", Helvetica;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     left: 10px;
     letter-spacing: 0;
